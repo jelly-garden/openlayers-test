@@ -1,3 +1,4 @@
+import View from "ol/View";
 import TileLayer from "ol/layer/Tile";
 import XYZ from "ol/source/XYZ";
 
@@ -59,4 +60,10 @@ const vworldSatelliteLayer = new TileLayer({
   maxZoom: 19,
   zIndex: 2,
   preload: Infinity,
+});
+
+const view = new View({
+  projection: "EPSG:3857",
+  center: [14135490.777017945, 4518386.883679577],
+  zoom: 17,
 });
