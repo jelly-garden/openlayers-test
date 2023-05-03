@@ -1,5 +1,5 @@
 import "./style.css";
-import { Map, View } from "ol";
+import View from "ol/View";
 import TileLayer from "ol/layer/Tile";
 import OSM from "ol/source/OSM";
 
@@ -14,4 +14,10 @@ const layer = new TileLayer({
   properties: { name: "base-osm" },
   zIndex: 1,
   preload: Infinity,
+});
+
+const view = new View({
+  projection: "EPSG:3857",
+  center: [14135490.777017945, 4518386.883679577],
+  zoom: 17,
 });
