@@ -1,5 +1,4 @@
-import Map from "ol/Map";
-import View from "ol/View";
+import { Map, View } from "ol";
 import TileLayer from "ol/layer/Tile";
 import XYZ from "ol/source/XYZ";
 

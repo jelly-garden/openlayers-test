@@ -1,4 +1,3 @@
 import "./style.css";
 
-// import "./src/osm";
-import "./src/vworld";
+import "./src/showMapInfo";
