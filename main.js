@@ -1,3 +1,3 @@
 import "./style.css";
 
-import "./src/showMapInfo";
+import "./src/changeMapObject";
