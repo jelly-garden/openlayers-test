@@ -2,7 +2,7 @@ import { Map, View } from "ol";
 import TileLayer from "ol/layer/Tile";
 import XYZ from "ol/source/XYZ";
 
-const API_KEY = "45AC10EE-FD63-31BA-97AE-045C59EC0EC6";
+const API_KEY = import.meta.env.VITE_VWORLD_API_KEY;
 
 // 기본지도
 const vworldBaseLayer = new TileLayer({
