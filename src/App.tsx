@@ -1,8 +1,12 @@
 import "./App.css";
-import "./pages/Osm";
+import { ChangeMapObject } from "./pages/ChangeMapObject";
 
 function App() {
-  return <div id="map"></div>;
+  return (
+    <>
+      <ChangeMapObject />
+    </>
+  );
 }
 
 export default App;
