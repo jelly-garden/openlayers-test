@@ -1,10 +1,21 @@
-import { Map, View } from "ol";
 import TileLayer from "ol/layer/Tile";
-import XYZ from "ol/source/XYZ";
+import { OSM, XYZ } from "ol/source";
 
 const API_KEY = import.meta.env.VITE_VWORLD_API_KEY;
 
-// 기본지도
+// OSM 지도
+const osmLayer = new TileLayer({
+  source: new OSM({
+    attributions:
+      '<p>Developed by <a href="https://itcode.dev" target="_blank">RWB</a></p>',
+    cacheSize: 0,
+  }),
+  properties: { name: "base-osm" },
+  zIndex: 1,
+  preload: Infinity,
+});
+
+// VWorld 기본지도
 const vworldBaseLayer = new TileLayer({
   source: new XYZ({
     url: `https://api.vworld.kr/req/wmts/1.0.0/${API_KEY}/Base/{z}/{y}/{x}.png`,
@@ -16,7 +27,7 @@ const vworldBaseLayer = new TileLayer({
   preload: Infinity,
 });
 
-// 백지도
+// VWorld 백지도
 const vworldGrayLayer = new TileLayer({
   source: new XYZ({
     url: `https://api.vworld.kr/req/wmts/1.0.0/${API_KEY}/gray/{z}/{y}/{x}.png`,
@@ -28,7 +39,7 @@ const vworldGrayLayer = new TileLayer({
   preload: Infinity,
 });
 
-// 야간지도
+// VWorld 야간지도
 const vworldMidnightLayer = new TileLayer({
   source: new XYZ({
     url: `https://api.vworld.kr/req/wmts/1.0.0/${API_KEY}/midnight/{z}/{y}/{x}.png`,
@@ -40,7 +51,7 @@ const vworldMidnightLayer = new TileLayer({
   preload: Infinity,
 });
 
-// 하이브리드 지도
+// VWorld 하이브리드 지도
 const vworldHybridLayer = new TileLayer({
   source: new XYZ({
     url: `https://api.vworld.kr/req/wmts/1.0.0/${API_KEY}/Hybrid/{z}/{y}/{x}.png`,
@@ -52,7 +63,7 @@ const vworldHybridLayer = new TileLayer({
   preload: Infinity,
 });
 
-// 위성지도
+// VWorld 위성지도
 const vworldSatelliteLayer = new TileLayer({
   source: new XYZ({
     url: `https://api.vworld.kr/req/wmts/1.0.0/${API_KEY}/Satellite/{z}/{y}/{x}.jpeg`,
@@ -64,20 +75,11 @@ const vworldSatelliteLayer = new TileLayer({
   preload: Infinity,
 });
 
-const view = new View({
-  projection: "EPSG:3857",
-  center: [14135490.777017945, 4518386.883679577],
-  zoom: 17,
-});
-
-const map = new Map({
-  layers: [
-    vworldBaseLayer,
-    vworldGrayLayer,
-    vworldMidnightLayer,
-    vworldHybridLayer,
-    vworldSatelliteLayer,
-  ],
-  target: "map",
-  view: view,
-});
+export {
+  osmLayer,
+  vworldBaseLayer,
+  vworldGrayLayer,
+  vworldMidnightLayer,
+  vworldHybridLayer,
+  vworldSatelliteLayer,
+};
