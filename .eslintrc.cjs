@@ -13,7 +13,7 @@ module.exports = {
     project: "./tsconfig.json",
   },
   root: true,
-  plugins: ["react-refresh", "prettier", "import"],
+  plugins: ["prettier", "import"],
   extends: [
     "eslint:recommended",
     "plugin:react/recommended",
@@ -68,7 +68,6 @@ module.exports = {
         endOfLine: "auto",
       },
     ],
-    "react-refresh/only-export-components": "warn",
   },
   settings: {
     react: {
