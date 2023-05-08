@@ -7,9 +7,5 @@ export default defineConfig({
   build: {
     sourcemap: true,
   },
-  plugins: [
-    react(),
-    VitePluginHtmlEnv(),
-    VitePluginHtmlEnv({ compiler: true }),
-  ],
+  plugins: [react(), VitePluginHtmlEnv(), VitePluginHtmlEnv({ compiler: true })],
 });

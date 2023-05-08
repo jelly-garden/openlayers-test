@@ -1,4 +1,5 @@
 import { Map, View } from "ol";
+
 import {
   vworldBaseLayer,
   vworldGrayLayer,
@@ -15,13 +16,7 @@ export const VWorld = () => {
   });
 
   const map = new Map({
-    layers: [
-      vworldBaseLayer,
-      vworldGrayLayer,
-      vworldMidnightLayer,
-      vworldHybridLayer,
-      vworldSatelliteLayer,
-    ],
+    layers: [vworldBaseLayer, vworldGrayLayer, vworldMidnightLayer, vworldHybridLayer, vworldSatelliteLayer],
     target: "map",
     view: view,
   });

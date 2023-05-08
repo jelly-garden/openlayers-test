@@ -6,8 +6,7 @@ const API_KEY = import.meta.env.VITE_VWORLD_API_KEY;
 // OSM 지도
 const osmLayer = new TileLayer({
   source: new OSM({
-    attributions:
-      '<p>Developed by <a href="https://itcode.dev" target="_blank">RWB</a></p>',
+    attributions: '<p>Developed by <a href="https://itcode.dev" target="_blank">RWB</a></p>',
     cacheSize: 0,
   }),
   properties: { name: "base-osm" },
@@ -75,11 +74,4 @@ const vworldSatelliteLayer = new TileLayer({
   preload: Infinity,
 });
 
-export {
-  osmLayer,
-  vworldBaseLayer,
-  vworldGrayLayer,
-  vworldMidnightLayer,
-  vworldHybridLayer,
-  vworldSatelliteLayer,
-};
+export { osmLayer, vworldBaseLayer, vworldGrayLayer, vworldMidnightLayer, vworldHybridLayer, vworldSatelliteLayer };
