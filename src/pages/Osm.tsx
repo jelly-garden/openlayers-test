@@ -19,5 +19,9 @@ export const Osm = () => {
     });
   }, []);
 
-  return <div id="map"></div>;
+  return (
+    <div className="ol-map-wrapper">
+      <div id="map"></div>
+    </div>
+  );
 };

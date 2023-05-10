@@ -25,8 +25,8 @@ export const ShowMapInfo = () => {
 
     map.on("moveend", (e: MapEvent) => {
       // 줌 레벨
-      const zoom2 = e.map.getView().getZoom();
-      console.log("## 줌 레벨2 : ", zoom2);
+      const zoom = e.map.getView().getZoom();
+      console.log("## 줌 레벨 : ", zoom);
 
       // 현재 영역 좌표 추출하기
       const [minX, minY, maxX, maxY]: number[] = e.map.getView().calculateExtent();
@@ -40,5 +40,9 @@ export const ShowMapInfo = () => {
     });
   }, []);
 
-  return <div id="map"></div>;
+  return (
+    <div className="ol-map-wrapper">
+      <div id="map"></div>
+    </div>
+  );
 };

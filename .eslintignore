@@ -1,2 +1,7 @@
+build
+logs
+node_modules
+public
+
 .eslintrc.cjs
 vite.config.ts

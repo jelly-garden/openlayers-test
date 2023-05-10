@@ -1,12 +1,22 @@
 import "./App.css";
 
-import { ChangeMapObject } from "./pages/ChangeMapObject";
+import { Routes, Route } from "react-router-dom";
+
+import { Layout } from "./layouts";
+import { Home, NotFound, Osm, VWorld, ShowMapInfo, ChangeMapObject } from "./pages";
 
 function App() {
   return (
-    <>
-      <ChangeMapObject />
-    </>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="osm" element={<Osm />} />
+        <Route path="vworld" element={<VWorld />} />
+        <Route path="show-map-info" element={<ShowMapInfo />} />
+        <Route path="change-map-object" element={<ChangeMapObject />} />
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
   );
 }
 
