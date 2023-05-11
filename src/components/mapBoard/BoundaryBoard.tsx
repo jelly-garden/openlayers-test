@@ -1,9 +1,9 @@
 import { useContext, useEffect } from "react";
 
-import CustomMapContext from "../customMap/CustomMapContext.tsx";
+import MapContext from "../map/MapContext.tsx";
 
 export const BoundaryBoard = () => {
-  const { map } = useContext(CustomMapContext);
+  const { map } = useContext(MapContext);
 
   /**
    * 영역 지정 메서드
@@ -44,26 +44,24 @@ export const BoundaryBoard = () => {
   }, [map]);
 
   return (
-    <>
-      <div className="map-board" data-name="boundary">
-        <div className="map-board-title">Boundary</div>
-        <div className="map-board-item">
-          <small>minX</small>
-          <input name="minX" readOnly />
-        </div>
-        <div className="map-board-item">
-          <small>minY</small>
-          <input name="minY" readOnly />
-        </div>
-        <div className="map-board-item">
-          <small>maxX</small>
-          <input name="maxX" readOnly />
-        </div>
-        <div className="map-board-item">
-          <small>maxY</small>
-          <input name="maxY" readOnly />
-        </div>
+    <div className="map-board" data-name="boundary">
+      <div className="map-board-title">Boundary</div>
+      <div className="map-board-item">
+        <small>minX</small>
+        <input name="minX" readOnly />
       </div>
-    </>
+      <div className="map-board-item">
+        <small>minY</small>
+        <input name="minY" readOnly />
+      </div>
+      <div className="map-board-item">
+        <small>maxX</small>
+        <input name="maxX" readOnly />
+      </div>
+      <div className="map-board-item">
+        <small>maxY</small>
+        <input name="maxY" readOnly />
+      </div>
+    </div>
   );
 };

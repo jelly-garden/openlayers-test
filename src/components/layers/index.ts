@@ -5,6 +5,6 @@ export {
   vworldHybridLayer,
   vworldMidnightLayer,
   vworldSatelliteLayer,
-} from "./MapLayer.ts";
-export { BaseMap, ExtMap } from "./types.ts";
-export type { BaseMapType, BaseMapValueType, ExtMapType, ExtMapValueType } from "./types.ts";
+} from "./MapLayer";
+export { BaseMap, ExtMap } from "./types";
+export type { BaseMapType, BaseMapValueType, ExtMapType, ExtMapValueType } from "./types";

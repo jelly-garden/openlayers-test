@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import { Map, View } from "ol";
+import { Map as OlMap, View } from "ol";
 
 import { osmLayer } from "../components/layers";
 
@@ -12,7 +12,7 @@ export const Osm = () => {
       zoom: 17,
     });
 
-    const map = new Map({
+    const map = new OlMap({
       layers: [osmLayer],
       target: "map",
       view: view,

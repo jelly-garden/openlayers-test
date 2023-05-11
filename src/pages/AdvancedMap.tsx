@@ -1,6 +1,6 @@
 import { ViewOptions } from "ol/View";
 
-import CustomMap from "../components/customMap";
+import Map from "../components/map";
 import MapBoard, { BoundaryBoard, LayerBoard, MetaBoard, PositionBoard } from "../components/mapBoard";
 
 export const AdvancedMap = () => {
@@ -12,14 +12,14 @@ export const AdvancedMap = () => {
 
   return (
     <div className="map-wrapper">
-      <CustomMap initialViewOptions={initialViewOptions}>
+      <Map initialViewOptions={initialViewOptions}>
         <MapBoard>
           <LayerBoard />
           <MetaBoard />
           <BoundaryBoard />
           <PositionBoard />
         </MapBoard>
-      </CustomMap>
+      </Map>
     </div>
   );
 };

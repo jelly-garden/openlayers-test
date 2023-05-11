@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 
-import { Map, View } from "ol";
+import { Map as OlMap, View } from "ol";
 
 import {
   BaseMap,
@@ -15,13 +15,13 @@ import {
 export const ChangeMapObject = () => {
   const mapRef = useRef<HTMLDivElement>(null);
 
-  const [map, setMap] = useState<Map>();
+  const [map, setMap] = useState<OlMap>();
   const [layerState, setLayerState] = useState<BaseMapValueType>(BaseMap.BASE_OSM);
 
   useEffect(() => {
     if (!mapRef.current) return;
 
-    const mapObject: Map = new Map({
+    const mapObject = new OlMap({
       layers: [osmLayer],
       view: new View({
         projection: "EPSG:3857",

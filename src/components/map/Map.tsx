@@ -1,26 +1,26 @@
 import { useEffect, useState, useRef, ReactNode } from "react";
 
-import { Map, View } from "ol";
+import { Map as OlMap, View } from "ol";
 import { ViewOptions } from "ol/View";
 
-import CustomMapContext from "./CustomMapContext";
+import MapContext from "./MapContext.tsx";
 
-import "./CustomMap.css";
+import "./Map.css";
 
-interface CustomMapProps {
+interface MapProps {
   children?: ReactNode;
   initialViewOptions: ViewOptions;
 }
 
-const CustomMap = ({ children, initialViewOptions }: CustomMapProps) => {
+const Map = ({ children, initialViewOptions }: MapProps) => {
   const mapRef = useRef<HTMLDivElement>(null);
 
-  const [map, setMap] = useState<Map>();
+  const [map, setMap] = useState<OlMap>();
 
   useEffect(() => {
     if (!mapRef.current) return;
 
-    const mapObject = new Map({
+    const mapObject = new OlMap({
       layers: [],
       view: new View(initialViewOptions),
     });
@@ -33,11 +33,11 @@ const CustomMap = ({ children, initialViewOptions }: CustomMapProps) => {
   }, [initialViewOptions]);
 
   return (
-    <CustomMapContext.Provider value={{ map }}>
+    <MapContext.Provider value={{ map }}>
       <div id="map" ref={mapRef}></div>
       {children}
-    </CustomMapContext.Provider>
+    </MapContext.Provider>
   );
 };
 
-export default CustomMap;
+export default Map;

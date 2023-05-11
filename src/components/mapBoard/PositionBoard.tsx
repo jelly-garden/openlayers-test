@@ -2,10 +2,10 @@ import { useContext, useEffect } from "react";
 
 import { MapBrowserEvent } from "ol";
 
-import CustomMapContext from "../customMap/CustomMapContext.tsx";
+import MapContext from "../map/MapContext.tsx";
 
 export const PositionBoard = () => {
-  const { map } = useContext(CustomMapContext);
+  const { map } = useContext(MapContext);
 
   /**
    * 마우스 위치 지정 메서드
@@ -42,18 +42,16 @@ export const PositionBoard = () => {
   }, [map]);
 
   return (
-    <>
-      <div className="map-board" data-name="positionState">
-        <div className="map-board-title">Position</div>
-        <div className="map-board-item">
-          <small>x</small>
-          <input name="x" readOnly />
-        </div>
-        <div className="map-board-item">
-          <small>y</small>
-          <input name="y" readOnly />
-        </div>
+    <div className="map-board" data-name="positionState">
+      <div className="map-board-title">Position</div>
+      <div className="map-board-item">
+        <small>x</small>
+        <input name="x" readOnly />
       </div>
-    </>
+      <div className="map-board-item">
+        <small>y</small>
+        <input name="y" readOnly />
+      </div>
+    </div>
   );
 };

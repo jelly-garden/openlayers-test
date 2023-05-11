@@ -5,6 +5,6 @@ import * as ol from "ol";
 interface MapContextProps {
   map?: ol.Map;
 }
-const CustomMapContext = createContext<MapContextProps>({});
+const MapContext = createContext<MapContextProps>({});
 
-export default CustomMapContext;
+export default MapContext;

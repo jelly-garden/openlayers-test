@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 
-import CustomMapContext from "../customMap/CustomMapContext.tsx";
+import MapContext from "../map/MapContext.tsx";
 import {
   BaseMap,
   BaseMapValueType,
@@ -13,7 +13,7 @@ import {
 } from "../layers";
 
 export const LayerBoard = () => {
-  const { map } = useContext(CustomMapContext);
+  const { map } = useContext(MapContext);
 
   const [layerState, setLayerState] = useState<BaseMapValueType>(BaseMap.BASE_OSM);
   const [extState, setExtState] = useState<boolean>(false);
@@ -71,30 +71,28 @@ export const LayerBoard = () => {
   }, [extState, map]);
 
   return (
-    <>
-      <div className="map-board" data-name="layer">
-        <div className="map-board-title">Layer</div>
-        <div className="map-board-item">
-          <small>layer</small>
-          <select value={layerState} onChange={(e) => setLayerState(e.target.value as BaseMapValueType)}>
-            <option value={BaseMap.BASE_OSM}>OSM</option>
-            <option value={BaseMap.BASE_VWORLD_BASE}>VWorld 기본</option>
-            <option value={BaseMap.BASE_VWORLD_GRAY}>VWorld 흑백</option>
-            <option value={BaseMap.BASE_VWORLD_MIDNIGHT}>VWorld 야간</option>
-            <option value={BaseMap.BASE_VWORLD_SATELLITE}>VWorld 위성</option>
-          </select>
-        </div>
-        <div className="map-board-item">
-          <small>ext</small>
-          <input
-            type="checkbox"
-            name="ext"
-            checked={extState}
-            disabled={layerState === BaseMap.BASE_OSM}
-            onChange={(e) => setExtState(e.target.checked)}
-          />
-        </div>
+    <div className="map-board" data-name="layer">
+      <div className="map-board-title">Layer</div>
+      <div className="map-board-item">
+        <small>layer</small>
+        <select value={layerState} onChange={(e) => setLayerState(e.target.value as BaseMapValueType)}>
+          <option value={BaseMap.BASE_OSM}>OSM</option>
+          <option value={BaseMap.BASE_VWORLD_BASE}>VWorld 기본</option>
+          <option value={BaseMap.BASE_VWORLD_GRAY}>VWorld 흑백</option>
+          <option value={BaseMap.BASE_VWORLD_MIDNIGHT}>VWorld 야간</option>
+          <option value={BaseMap.BASE_VWORLD_SATELLITE}>VWorld 위성</option>
+        </select>
       </div>
-    </>
+      <div className="map-board-item">
+        <small>ext</small>
+        <input
+          type="checkbox"
+          name="ext"
+          checked={extState}
+          disabled={layerState === BaseMap.BASE_OSM}
+          onChange={(e) => setExtState(e.target.checked)}
+        />
+      </div>
+    </div>
   );
 };

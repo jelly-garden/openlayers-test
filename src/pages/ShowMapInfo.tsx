@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 
-import { Map, View, MapBrowserEvent } from "ol";
+import { Map as OlMap, View, MapBrowserEvent } from "ol";
 import TileLayer from "ol/layer/Tile";
 import OSM from "ol/source/OSM";
 
 export const ShowMapInfo = () => {
   useEffect(() => {
-    const map = new Map({
+    const map = new OlMap({
       target: "map",
       layers: [
         new TileLayer({

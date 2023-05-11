@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 
-import CustomMapContext from "../customMap/CustomMapContext.tsx";
+import MapContext from "../map/MapContext.tsx";
 
 export const MetaBoard = () => {
-  const { map } = useContext(CustomMapContext);
+  const { map } = useContext(MapContext);
 
   const [projState, setProjState] = useState<string>("");
   // const [zoomState, setZoomState] = useState<number | undefined>(0);
@@ -49,18 +49,16 @@ export const MetaBoard = () => {
   }, [map]);
 
   return (
-    <>
-      <div className="map-board" data-name="meta">
-        <div className="map-board-title">Meta</div>
-        <div className="map-board-item">
-          <small>proj</small>
-          <input name="proj" value={projState} readOnly />
-        </div>
-        <div className="map-board-item">
-          <small>zoom</small>
-          <input name="zoom" readOnly />
-        </div>
+    <div className="map-board" data-name="meta">
+      <div className="map-board-title">Meta</div>
+      <div className="map-board-item">
+        <small>proj</small>
+        <input name="proj" value={projState} readOnly />
       </div>
-    </>
+      <div className="map-board-item">
+        <small>zoom</small>
+        <input name="zoom" readOnly />
+      </div>
+    </div>
   );
 };

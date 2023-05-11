@@ -1,7 +1,7 @@
 import TileLayer from "ol/layer/Tile";
 import { OSM, XYZ } from "ol/source";
 
-import { BaseMap, ExtMap } from "./types.ts";
+import { BaseMap, ExtMap } from "./types";
 
 const API_KEY = import.meta.env.VITE_VWORLD_API_KEY;
 
