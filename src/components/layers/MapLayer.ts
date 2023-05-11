@@ -1,15 +1,16 @@
 import TileLayer from "ol/layer/Tile";
 import { OSM, XYZ } from "ol/source";
 
+import { BaseMap, ExtMap } from "./types.ts";
+
 const API_KEY = import.meta.env.VITE_VWORLD_API_KEY;
 
 // OSM 지도
 const osmLayer = new TileLayer({
   source: new OSM({
-    attributions: '<p>Developed by <a href="https://itcode.dev" target="_blank">RWB</a></p>',
     cacheSize: 0,
   }),
-  properties: { name: "base-osm" },
+  properties: { name: BaseMap.BASE_OSM },
   zIndex: 1,
   preload: Infinity,
 });
@@ -19,7 +20,7 @@ const vworldBaseLayer = new TileLayer({
   source: new XYZ({
     url: `https://api.vworld.kr/req/wmts/1.0.0/${API_KEY}/Base/{z}/{y}/{x}.png`,
   }),
-  properties: { name: "base-vworld-base" },
+  properties: { name: BaseMap.BASE_VWORLD_BASE },
   minZoom: 5,
   maxZoom: 19,
   zIndex: 2,
@@ -31,7 +32,7 @@ const vworldGrayLayer = new TileLayer({
   source: new XYZ({
     url: `https://api.vworld.kr/req/wmts/1.0.0/${API_KEY}/gray/{z}/{y}/{x}.png`,
   }),
-  properties: { name: "base-vworld-gray" },
+  properties: { name: BaseMap.BASE_VWORLD_GRAY },
   minZoom: 5,
   maxZoom: 18,
   zIndex: 2,
@@ -43,7 +44,7 @@ const vworldMidnightLayer = new TileLayer({
   source: new XYZ({
     url: `https://api.vworld.kr/req/wmts/1.0.0/${API_KEY}/midnight/{z}/{y}/{x}.png`,
   }),
-  properties: { name: "base-vworld-midnight" },
+  properties: { name: BaseMap.BASE_VWORLD_MIDNIGHT },
   minZoom: 5,
   maxZoom: 18,
   zIndex: 2,
@@ -55,7 +56,7 @@ const vworldHybridLayer = new TileLayer({
   source: new XYZ({
     url: `https://api.vworld.kr/req/wmts/1.0.0/${API_KEY}/Hybrid/{z}/{y}/{x}.png`,
   }),
-  properties: { name: "ext-vworld-hybrid" },
+  properties: { name: ExtMap.EXT_VWORLD_HYBRID },
   minZoom: 5,
   maxZoom: 19,
   zIndex: 3,
@@ -67,7 +68,7 @@ const vworldSatelliteLayer = new TileLayer({
   source: new XYZ({
     url: `https://api.vworld.kr/req/wmts/1.0.0/${API_KEY}/Satellite/{z}/{y}/{x}.jpeg`,
   }),
-  properties: { name: "base-vworld-satellite" },
+  properties: { name: BaseMap.BASE_VWORLD_SATELLITE },
   minZoom: 5,
   maxZoom: 19,
   zIndex: 2,

@@ -3,19 +3,20 @@ import { useEffect, useState, useRef } from "react";
 import { Map, View } from "ol";
 
 import {
+  BaseMap,
+  BaseMapValueType,
   osmLayer,
   vworldBaseLayer,
   vworldGrayLayer,
   vworldMidnightLayer,
-  vworldHybridLayer,
   vworldSatelliteLayer,
-} from "./MapLayer";
+} from "../components/layers";
 
 export const ChangeMapObject = () => {
   const mapRef = useRef<HTMLDivElement>(null);
 
   const [map, setMap] = useState<Map>();
-  const [layerState, setLayerState] = useState<string>();
+  const [layerState, setLayerState] = useState<BaseMapValueType>(BaseMap.BASE_OSM);
 
   useEffect(() => {
     if (!mapRef.current) return;
@@ -56,9 +57,6 @@ export const ChangeMapObject = () => {
       case "base-vworld-midnight":
         map.addLayer(vworldMidnightLayer);
         break;
-      case "base-vworld-hybrid":
-        map.addLayer(vworldHybridLayer);
-        break;
       case "base-vworld-satellite":
         map.addLayer(vworldSatelliteLayer);
         break;
@@ -69,17 +67,17 @@ export const ChangeMapObject = () => {
   }, [layerState, map]);
 
   return (
-    <div className="ol-map-wrapper">
+    <div className="map-wrapper">
       <select
         value={layerState}
-        onChange={(e) => setLayerState(e.target.value)}
+        onChange={(e) => setLayerState(e.target.value as BaseMapValueType)}
         style={{ position: "absolute", right: "10px", top: "10px", zIndex: 1 }}
       >
-        <option value="base-osm">OSM</option>
-        <option value="base-vworld-base">VWorld 기본</option>
-        <option value="base-vworld-gray">VWorld 흑백</option>
-        <option value="base-vworld-midnight">VWorld 야간</option>
-        <option value="base-vworld-satellite">VWorld 위성</option>
+        <option value={BaseMap.BASE_OSM}>OSM</option>
+        <option value={BaseMap.BASE_VWORLD_BASE}>VWorld 기본</option>
+        <option value={BaseMap.BASE_VWORLD_GRAY}>VWorld 흑백</option>
+        <option value={BaseMap.BASE_VWORLD_MIDNIGHT}>VWorld 야간</option>
+        <option value={BaseMap.BASE_VWORLD_SATELLITE}>VWorld 위성</option>
       </select>
       <div id="map" ref={mapRef}></div>
     </div>

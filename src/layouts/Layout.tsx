@@ -8,6 +8,7 @@ export const Layout = () => {
     { path: "/vworld", name: "VWorld 맵" },
     { path: "/show-map-info", name: "맵 정보 추출" },
     { path: "/change-map-object", name: "지도 객체 변경" },
+    { path: "/advanced-map", name: "고도화" },
   ];
 
   return (

@@ -8,7 +8,7 @@ import {
   vworldMidnightLayer,
   vworldHybridLayer,
   vworldSatelliteLayer,
-} from "./MapLayer";
+} from "../components/layers";
 
 export const VWorld = () => {
   useEffect(() => {
@@ -26,7 +26,7 @@ export const VWorld = () => {
   }, []);
 
   return (
-    <div className="ol-map-wrapper">
+    <div className="map-wrapper">
       <div id="map"></div>
     </div>
   );

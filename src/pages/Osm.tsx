@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 import { Map, View } from "ol";
 
-import { osmLayer } from "./MapLayer";
+import { osmLayer } from "../components/layers";
 
 export const Osm = () => {
   useEffect(() => {
@@ -20,7 +20,7 @@ export const Osm = () => {
   }, []);
 
   return (
-    <div className="ol-map-wrapper">
+    <div className="map-wrapper">
       <div id="map"></div>
     </div>
   );
