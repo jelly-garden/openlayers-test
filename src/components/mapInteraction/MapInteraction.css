@@ -1,0 +1,27 @@
+.map-interaction {
+    position: absolute;
+    left: 25px;
+    bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.location {
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    overflow: hidden;
+    display: inline-block;
+    border: 1px solid #dcdcdc;
+    border-radius: 10px;
+    box-shadow: 3px 3px 10px gray;
+    box-sizing: border-box;
+    width: 36px;
+    height: 36px;
+    font-size: 0;
+    background-color: #fff;
+    background-size: 527px 476px;
+    background-position: -428px -197px;
+    background-image: url("https://ssl.pstatic.net/static/maps/v5/pc/20230404144118/home@2x.png");
+}

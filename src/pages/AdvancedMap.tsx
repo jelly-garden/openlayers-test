@@ -2,6 +2,7 @@ import { ViewOptions } from "ol/View";
 
 import Map from "../components/map";
 import MapBoard, { BoundaryBoard, LayerBoard, MetaBoard, PositionBoard } from "../components/mapBoard";
+import MapInteraction, { Location } from "../components/mapInteraction";
 
 export const AdvancedMap = () => {
   const initialViewOptions: ViewOptions = {
@@ -13,6 +14,9 @@ export const AdvancedMap = () => {
   return (
     <div className="map-wrapper">
       <Map initialViewOptions={initialViewOptions}>
+        <MapInteraction>
+          <Location />
+        </MapInteraction>
         <MapBoard>
           <LayerBoard />
           <MetaBoard />

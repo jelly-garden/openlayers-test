@@ -1,9 +1,9 @@
-import "./App.css";
-
 import { Routes, Route } from "react-router-dom";
 
 import { Layout } from "./layouts";
 import { Home, NotFound, Osm, VWorld, ShowMapInfo, ChangeMapObject, AdvancedMap } from "./pages";
+
+import "./App.css";
 
 function App() {
   return (

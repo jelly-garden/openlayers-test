@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 
-import MapContext from "../map/MapContext.tsx";
 import {
   BaseMap,
   BaseMapValueType,
@@ -11,6 +10,7 @@ import {
   vworldMidnightLayer,
   vworldSatelliteLayer,
 } from "../layers";
+import MapContext from "../map/MapContext";
 
 export const LayerBoard = () => {
   const { map } = useContext(MapContext);
@@ -71,7 +71,7 @@ export const LayerBoard = () => {
   }, [extState, map]);
 
   return (
-    <div className="map-board" data-name="layer">
+    <div className="map-board-item-group" data-name="layer">
       <div className="map-board-title">Layer</div>
       <div className="map-board-item">
         <small>layer</small>

@@ -3,7 +3,7 @@ import { useEffect, useState, useRef, ReactNode } from "react";
 import { Map as OlMap, View } from "ol";
 import { ViewOptions } from "ol/View";
 
-import MapContext from "./MapContext.tsx";
+import MapContext from "./MapContext";
 
 import "./Map.css";
 

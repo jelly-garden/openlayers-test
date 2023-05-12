@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 
-import MapContext from "../map/MapContext.tsx";
+import MapContext from "../map/MapContext";
 
 export const BoundaryBoard = () => {
   const { map } = useContext(MapContext);
@@ -44,7 +44,7 @@ export const BoundaryBoard = () => {
   }, [map]);
 
   return (
-    <div className="map-board" data-name="boundary">
+    <div className="map-board-item-group" data-name="boundary">
       <div className="map-board-title">Boundary</div>
       <div className="map-board-item">
         <small>minX</small>

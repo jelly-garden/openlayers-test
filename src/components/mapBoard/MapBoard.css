@@ -1,22 +1,22 @@
-.map-boards {
+.map-board {
+    position: absolute;
+    right: 25px;
+    bottom: 25px;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    background-color: #fff;
+    padding: 10px;
     border: 1px solid #dcdcdc;
     border-radius: 10px;
     box-shadow: 3px 3px 10px gray;
     box-sizing: border-box;
-    height: 436px;
     overflow: hidden;
-    padding: 10px;
-    position: absolute;
-    right: 25px;
-    bottom: 25px;
     width: 220px;
+    height: 436px;
+    background-color: #fff;
 }
 
-.map-board {
+.map-board-item-group {
     display: flex;
     flex-direction: column;
     gap: 5px;

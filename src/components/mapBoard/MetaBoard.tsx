@@ -1,12 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 
-import MapContext from "../map/MapContext.tsx";
+import MapContext from "../map/MapContext";
 
 export const MetaBoard = () => {
   const { map } = useContext(MapContext);
 
   const [projState, setProjState] = useState<string>("");
-  // const [zoomState, setZoomState] = useState<number | undefined>(0);
 
   /**
    * EPSG 코드 추출
@@ -49,7 +48,7 @@ export const MetaBoard = () => {
   }, [map]);
 
   return (
-    <div className="map-board" data-name="meta">
+    <div className="map-board-item-group" data-name="meta">
       <div className="map-board-title">Meta</div>
       <div className="map-board-item">
         <small>proj</small>

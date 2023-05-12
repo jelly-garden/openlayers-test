@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 
 import { MapBrowserEvent } from "ol";
 
-import MapContext from "../map/MapContext.tsx";
+import MapContext from "../map/MapContext";
 
 export const PositionBoard = () => {
   const { map } = useContext(MapContext);
@@ -42,7 +42,7 @@ export const PositionBoard = () => {
   }, [map]);
 
   return (
-    <div className="map-board" data-name="positionState">
+    <div className="map-board-item-group" data-name="positionState">
       <div className="map-board-title">Position</div>
       <div className="map-board-item">
         <small>x</small>
