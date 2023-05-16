@@ -1,5 +1,5 @@
-import TileLayer from "ol/layer/Tile";
-import { OSM, XYZ } from "ol/source";
+import { Tile as TileLayer } from "ol/layer";
+import { OSM as OSMSource, XYZ as XYZSource } from "ol/source";
 
 import { BaseMap, ExtMap } from "./types";
 
@@ -7,7 +7,7 @@ const API_KEY = import.meta.env.VITE_VWORLD_API_KEY;
 
 // OSM 지도
 const osmLayer = new TileLayer({
-  source: new OSM({
+  source: new OSMSource({
     cacheSize: 0,
   }),
   properties: { name: BaseMap.BASE_OSM },
@@ -17,7 +17,7 @@ const osmLayer = new TileLayer({
 
 // VWorld 기본지도
 const vworldBaseLayer = new TileLayer({
-  source: new XYZ({
+  source: new XYZSource({
     url: `https://api.vworld.kr/req/wmts/1.0.0/${API_KEY}/Base/{z}/{y}/{x}.png`,
   }),
   properties: { name: BaseMap.BASE_VWORLD_BASE },
@@ -29,7 +29,7 @@ const vworldBaseLayer = new TileLayer({
 
 // VWorld 백지도
 const vworldGrayLayer = new TileLayer({
-  source: new XYZ({
+  source: new XYZSource({
     url: `https://api.vworld.kr/req/wmts/1.0.0/${API_KEY}/gray/{z}/{y}/{x}.png`,
   }),
   properties: { name: BaseMap.BASE_VWORLD_GRAY },
@@ -41,7 +41,7 @@ const vworldGrayLayer = new TileLayer({
 
 // VWorld 야간지도
 const vworldMidnightLayer = new TileLayer({
-  source: new XYZ({
+  source: new XYZSource({
     url: `https://api.vworld.kr/req/wmts/1.0.0/${API_KEY}/midnight/{z}/{y}/{x}.png`,
   }),
   properties: { name: BaseMap.BASE_VWORLD_MIDNIGHT },
@@ -53,7 +53,7 @@ const vworldMidnightLayer = new TileLayer({
 
 // VWorld 하이브리드 지도
 const vworldHybridLayer = new TileLayer({
-  source: new XYZ({
+  source: new XYZSource({
     url: `https://api.vworld.kr/req/wmts/1.0.0/${API_KEY}/Hybrid/{z}/{y}/{x}.png`,
   }),
   properties: { name: ExtMap.EXT_VWORLD_HYBRID },
@@ -65,7 +65,7 @@ const vworldHybridLayer = new TileLayer({
 
 // VWorld 위성지도
 const vworldSatelliteLayer = new TileLayer({
-  source: new XYZ({
+  source: new XYZSource({
     url: `https://api.vworld.kr/req/wmts/1.0.0/${API_KEY}/Satellite/{z}/{y}/{x}.jpeg`,
   }),
   properties: { name: BaseMap.BASE_VWORLD_SATELLITE },

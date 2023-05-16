@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 
 import { Map as OlMap, View, MapBrowserEvent } from "ol";
-import TileLayer from "ol/layer/Tile";
-import OSM from "ol/source/OSM";
+import { Tile as TileLayer } from "ol/layer";
+import { OSM as OSMSource } from "ol/source";
 
 export const ShowMapInfo = () => {
   useEffect(() => {
@@ -10,7 +10,7 @@ export const ShowMapInfo = () => {
       target: "map",
       layers: [
         new TileLayer({
-          source: new OSM(),
+          source: new OSMSource(),
         }),
       ],
       view: new View({

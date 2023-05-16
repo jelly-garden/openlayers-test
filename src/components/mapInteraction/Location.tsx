@@ -2,9 +2,9 @@ import { useContext, useEffect } from "react";
 
 import { Feature } from "ol";
 import { Point } from "ol/geom";
-import VectorLayer from "ol/layer/Vector";
+import { Vector as VectorLayer } from "ol/layer";
 import * as olProj from "ol/proj";
-import { Vector } from "ol/source";
+import { Vector as VectorSource } from "ol/source";
 import { Style, Icon } from "ol/style";
 
 import MapContext from "../map/MapContext";
@@ -34,13 +34,12 @@ export const Location = () => {
           const locationSource = map
             .getAllLayers()
             .filter((layer) => layer.get("name") === "location")[0]
-            .getSource() as Vector;
+            .getSource() as VectorSource;
           if (locationSource) {
-            locationSource.addFeature(
-              new Feature({
-                geometry: new Point(newCoordinate),
-              })
-            );
+            const locationFeature = new Feature({
+              geometry: new Point(newCoordinate),
+            });
+            locationSource.addFeature(locationFeature);
           }
         },
         () => alert("실패"),
@@ -57,7 +56,7 @@ export const Location = () => {
       const locationSource = map
         .getAllLayers()
         .filter((layer) => layer.get("name") === "location")[0]
-        .getSource() as Vector;
+        .getSource() as VectorSource;
       if (locationSource) {
         locationSource.clear();
       }
@@ -67,7 +66,7 @@ export const Location = () => {
     if (map.getAllLayers().filter((layer) => layer.get("name") === "location").length === 0) {
       // 전용 레이어를 하나 추가함
       const locationLayer = new VectorLayer({
-        source: new Vector(),
+        source: new VectorSource(),
         properties: {
           name: "location",
         },

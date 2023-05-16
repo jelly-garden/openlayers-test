@@ -6,5 +6,11 @@ export {
   vworldMidnightLayer,
   vworldSatelliteLayer,
 } from "./MapLayers";
-export { BaseMap, ExtMap } from "./types";
-export type { BaseMapType, BaseMapValueType, ExtMapType, ExtMapValueType } from "./types";
+export {
+  BaseMap,
+  ExtMap,
+  type BaseMapType,
+  type BaseMapValueType,
+  type ExtMapType,
+  type ExtMapValueType,
+} from "./types";
