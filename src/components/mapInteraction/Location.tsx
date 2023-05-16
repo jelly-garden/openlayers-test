@@ -1,8 +1,13 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
+import { Feature } from "ol";
+import { Point } from "ol/geom";
+import VectorLayer from "ol/layer/Vector";
 import * as olProj from "ol/proj";
+import { Vector } from "ol/source";
+import { Style, Icon } from "ol/style";
 
-import MapContext from "../map/MapContext.tsx";
+import MapContext from "../map/MapContext";
 
 export const Location = () => {
   const { map } = useContext(MapContext);
@@ -10,7 +15,7 @@ export const Location = () => {
   /**
    * 현재 위치로 이동 메서드
    */
-  const handleMoveLocationClick = () => {
+  const handleCurrentLocationClick = () => {
     if (!map) return;
 
     if ("geolocation" in navigator) {
@@ -21,7 +26,22 @@ export const Location = () => {
           const newCode: string = map.getView().getProjection().getCode();
           const oldCoordinate = [longitude, latitude];
           const newCoordinate = olProj.transform(oldCoordinate, oldCode, newCode);
+
+          // 지도 이동
           map.getView().setCenter(newCoordinate);
+
+          // location 레이어의 Source에 Feature를 추가
+          const locationSource = map
+            .getAllLayers()
+            .filter((layer) => layer.get("name") === "location")[0]
+            .getSource() as Vector;
+          if (locationSource) {
+            locationSource.addFeature(
+              new Feature({
+                geometry: new Point(newCoordinate),
+              })
+            );
+          }
         },
         () => alert("실패"),
         { enableHighAccuracy: true }
@@ -29,8 +49,42 @@ export const Location = () => {
     }
   };
 
+  useEffect(() => {
+    if (!map) return;
+
+    // 드래그 할 경우, 레이어의 Feature를 전부 초기화
+    map.on("pointerdrag", () => {
+      const locationSource = map
+        .getAllLayers()
+        .filter((layer) => layer.get("name") === "location")[0]
+        .getSource() as Vector;
+      if (locationSource) {
+        locationSource.clear();
+      }
+    });
+
+    // location 벡터 레이어가 없을 경우
+    if (map.getAllLayers().filter((layer) => layer.get("name") === "location").length === 0) {
+      // 전용 레이어를 하나 추가함
+      const locationLayer = new VectorLayer({
+        source: new Vector(),
+        properties: {
+          name: "location",
+        },
+        style: new Style({
+          image: new Icon({
+            src: "https://tsauerwein.github.io/ol3/animation-flights/examples/data/icon.png",
+          }),
+        }),
+        minZoom: 15,
+        zIndex: 10,
+      });
+      map.addLayer(locationLayer);
+    }
+  }, [map]);
+
   return (
-    <button className="location" onClick={handleMoveLocationClick}>
+    <button className="location" onClick={handleCurrentLocationClick}>
       현재 위치
     </button>
   );

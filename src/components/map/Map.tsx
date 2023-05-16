@@ -3,6 +3,8 @@ import { useEffect, useState, useRef, ReactNode } from "react";
 import { Map as OlMap, View } from "ol";
 import { ViewOptions } from "ol/View";
 
+import { osmLayer } from "../layers";
+
 import MapContext from "./MapContext";
 
 import "./Map.css";
@@ -21,7 +23,7 @@ const Map = ({ children, initialViewOptions }: MapProps) => {
     if (!mapRef.current) return;
 
     const mapObject = new OlMap({
-      layers: [],
+      layers: [osmLayer],
       view: new View(initialViewOptions),
     });
     mapObject.setTarget(mapRef.current);
