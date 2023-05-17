@@ -8,4 +8,12 @@ export default defineConfig({
     sourcemap: true,
   },
   plugins: [react(), VitePluginHtmlEnv(), VitePluginHtmlEnv({ compiler: true })],
+  server: {
+    proxy: {
+      '/geoserver': {
+        target: 'http://localhost:8081',
+        changeOrigin: true,
+      }
+    }
+  }
 });

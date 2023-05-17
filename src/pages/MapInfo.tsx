@@ -4,7 +4,7 @@ import { Map as OlMap, View as OlView, MapBrowserEvent as OlMapBrowserEvent } fr
 import { Tile as OlTileLayer } from "ol/layer";
 import { OSM as OlOSMSource } from "ol/source";
 
-export const ShowMapInfo = () => {
+export const MapInfo = () => {
   useEffect(() => {
     const map = new OlMap({
       target: "map",

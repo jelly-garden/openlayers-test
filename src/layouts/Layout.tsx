@@ -6,9 +6,10 @@ const Layout = () => {
     { path: "/", name: "Home" },
     { path: "/osm", name: "OSM 맵" },
     { path: "/vworld", name: "VWorld 맵" },
-    { path: "/show-map-info", name: "맵 정보 추출" },
+    { path: "/map-info", name: "맵 정보 추출" },
     { path: "/change-map-object", name: "지도 객체 변경" },
-    { path: "/advanced-map", name: "고도화" },
+    { path: "/map-component", name: "맵 컴포넌트화" },
+    { path: "/feature", name: "자산" },
   ];
 
   return (

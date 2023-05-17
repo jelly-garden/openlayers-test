@@ -63,7 +63,8 @@ const Location = () => {
     });
 
     // location 벡터 레이어가 없을 경우
-    if (map.getAllLayers().filter((layer) => layer.get("name") === "location").length === 0) {
+    const locationLayers = map.getAllLayers().filter((layer) => layer.get("name") === "location");
+    if (locationLayers.length === 0) {
       // 전용 레이어를 하나 추가함
       const locationLayer = new OlVectorLayer({
         source: new OlVectorSource(),

@@ -49,6 +49,15 @@ const LayerBoard = () => {
         setExtState(false);
         break;
     }
+
+    return () => {
+      if (map) {
+        map
+          .getAllLayers()
+          .filter((layer) => (layer.get("name") as string).startsWith("base"))
+          .forEach((layer) => map.removeLayer(layer));
+      }
+    };
   }, [layerState, map]);
 
   /**
@@ -68,6 +77,15 @@ const LayerBoard = () => {
         .filter((layer) => (layer.get("name") as string).startsWith("ext"))
         .forEach((layer) => map.removeLayer(layer));
     }
+
+    return () => {
+      if (map) {
+        map
+          .getAllLayers()
+          .filter((layer) => (layer.get("name") as string).startsWith("ext"))
+          .forEach((layer) => map.removeLayer(layer));
+      }
+    };
   }, [extState, map]);
 
   return (
