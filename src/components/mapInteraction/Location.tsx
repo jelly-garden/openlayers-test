@@ -1,15 +1,15 @@
 import { useContext, useEffect } from "react";
 
-import { Feature } from "ol";
-import { Point } from "ol/geom";
-import { Vector as VectorLayer } from "ol/layer";
-import * as olProj from "ol/proj";
-import { Vector as VectorSource } from "ol/source";
-import { Style, Icon } from "ol/style";
+import { Feature as OlFeature } from "ol";
+import { Point as OlPoint } from "ol/geom";
+import { Vector as OlVectorLayer } from "ol/layer";
+import * as OlProj from "ol/proj";
+import { Vector as OlVectorSource } from "ol/source";
+import { Style as OlStyle, Icon as OlIcon } from "ol/style";
 
-import MapContext from "../map/MapContext";
+import { MapContext } from "../map";
 
-export const Location = () => {
+const Location = () => {
   const { map } = useContext(MapContext);
 
   /**
@@ -25,7 +25,7 @@ export const Location = () => {
           const oldCode = "EPSG:4326";
           const newCode: string = map.getView().getProjection().getCode();
           const oldCoordinate = [longitude, latitude];
-          const newCoordinate = olProj.transform(oldCoordinate, oldCode, newCode);
+          const newCoordinate = OlProj.transform(oldCoordinate, oldCode, newCode);
 
           // 지도 이동
           map.getView().setCenter(newCoordinate);
@@ -34,10 +34,10 @@ export const Location = () => {
           const locationSource = map
             .getAllLayers()
             .filter((layer) => layer.get("name") === "location")[0]
-            .getSource() as VectorSource;
+            .getSource() as OlVectorSource;
           if (locationSource) {
-            const locationFeature = new Feature({
-              geometry: new Point(newCoordinate),
+            const locationFeature = new OlFeature({
+              geometry: new OlPoint(newCoordinate),
             });
             locationSource.addFeature(locationFeature);
           }
@@ -56,7 +56,7 @@ export const Location = () => {
       const locationSource = map
         .getAllLayers()
         .filter((layer) => layer.get("name") === "location")[0]
-        .getSource() as VectorSource;
+        .getSource() as OlVectorSource;
       if (locationSource) {
         locationSource.clear();
       }
@@ -65,13 +65,13 @@ export const Location = () => {
     // location 벡터 레이어가 없을 경우
     if (map.getAllLayers().filter((layer) => layer.get("name") === "location").length === 0) {
       // 전용 레이어를 하나 추가함
-      const locationLayer = new VectorLayer({
-        source: new VectorSource(),
+      const locationLayer = new OlVectorLayer({
+        source: new OlVectorSource(),
         properties: {
           name: "location",
         },
-        style: new Style({
-          image: new Icon({
+        style: new OlStyle({
+          image: new OlIcon({
             src: "https://tsauerwein.github.io/ol3/animation-flights/examples/data/icon.png",
           }),
         }),
@@ -88,3 +88,5 @@ export const Location = () => {
     </button>
   );
 };
+
+export default Location;

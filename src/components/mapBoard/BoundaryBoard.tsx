@@ -1,8 +1,8 @@
 import { useContext, useEffect } from "react";
 
-import MapContext from "../map/MapContext";
+import { MapContext } from "../map";
 
-export const BoundaryBoard = () => {
+const BoundaryBoard = () => {
   const { map } = useContext(MapContext);
 
   /**
@@ -65,3 +65,5 @@ export const BoundaryBoard = () => {
     </div>
   );
 };
+
+export default BoundaryBoard;

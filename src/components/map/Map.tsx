@@ -1,9 +1,7 @@
 import { useEffect, useState, useRef, ReactNode } from "react";
 
-import { Map as OlMap, View } from "ol";
-import { ViewOptions } from "ol/View";
-
-import { osmLayer } from "../layers";
+import { Map as OlMap, View as OlView } from "ol";
+import { ViewOptions as OlViewOptions } from "ol/View";
 
 import MapContext from "./MapContext";
 
@@ -11,7 +9,7 @@ import "./Map.css";
 
 interface MapProps {
   children?: ReactNode;
-  initialViewOptions: ViewOptions;
+  initialViewOptions: OlViewOptions;
 }
 
 const Map = ({ children, initialViewOptions }: MapProps) => {
@@ -23,8 +21,8 @@ const Map = ({ children, initialViewOptions }: MapProps) => {
     if (!mapRef.current) return;
 
     const mapObject = new OlMap({
-      layers: [osmLayer],
-      view: new View(initialViewOptions),
+      layers: [],
+      view: new OlView(initialViewOptions),
     });
     mapObject.setTarget(mapRef.current);
     setMap(mapObject);

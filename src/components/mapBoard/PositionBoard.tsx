@@ -1,10 +1,10 @@
 import { useContext, useEffect } from "react";
 
-import { MapBrowserEvent } from "ol";
+import { MapBrowserEvent as OlMapBrowserEvent } from "ol";
 
-import MapContext from "../map/MapContext";
+import { MapContext } from "../map";
 
-export const PositionBoard = () => {
+const PositionBoard = () => {
   const { map } = useContext(MapContext);
 
   /**
@@ -35,7 +35,7 @@ export const PositionBoard = () => {
       }
     });
 
-    map.on("pointermove", (e: MapBrowserEvent<UIEvent>) => {
+    map.on("pointermove", (e: OlMapBrowserEvent<UIEvent>) => {
       const [x, y]: number[] = e.coordinate;
       setPosition([x, y]);
     });
@@ -55,3 +55,5 @@ export const PositionBoard = () => {
     </div>
   );
 };
+
+export default PositionBoard;

@@ -10,9 +10,9 @@ import {
   vworldMidnightLayer,
   vworldSatelliteLayer,
 } from "../layers";
-import MapContext from "../map/MapContext";
+import { MapContext } from "../map";
 
-export const LayerBoard = () => {
+const LayerBoard = () => {
   const { map } = useContext(MapContext);
 
   const [layerState, setLayerState] = useState<BaseMapValueType>(BaseMap.BASE_OSM);
@@ -96,3 +96,5 @@ export const LayerBoard = () => {
     </div>
   );
 };
+
+export default LayerBoard;

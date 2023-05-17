@@ -1,2 +1,4 @@
-export { default } from "./MapInteraction";
-export { Location } from "./Location";
+import Location from "./Location";
+import MapInteraction from "./MapInteraction";
+
+export { MapInteraction, Location };

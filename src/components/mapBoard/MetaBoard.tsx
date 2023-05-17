@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 
-import MapContext from "../map/MapContext";
+import { MapContext } from "../map";
 
-export const MetaBoard = () => {
+const MetaBoard = () => {
   const { map } = useContext(MapContext);
 
   const [projState, setProjState] = useState<string>("");
@@ -61,3 +61,5 @@ export const MetaBoard = () => {
     </div>
   );
 };
+
+export default MetaBoard;

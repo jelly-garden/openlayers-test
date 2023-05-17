@@ -1,7 +1,7 @@
 import { Outlet, NavLink } from "react-router-dom";
 import "./Layout.css";
 
-export const Layout = () => {
+const Layout = () => {
   const menus = [
     { path: "/", name: "Home" },
     { path: "/osm", name: "OSM 맵" },
@@ -31,3 +31,5 @@ export const Layout = () => {
     </>
   );
 };
+
+export default Layout;

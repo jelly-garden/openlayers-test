@@ -1,19 +1,19 @@
 import { useEffect } from "react";
 
-import { Map as OlMap, View, MapBrowserEvent } from "ol";
-import { Tile as TileLayer } from "ol/layer";
-import { OSM as OSMSource } from "ol/source";
+import { Map as OlMap, View as OlView, MapBrowserEvent as OlMapBrowserEvent } from "ol";
+import { Tile as OlTileLayer } from "ol/layer";
+import { OSM as OlOSMSource } from "ol/source";
 
 export const ShowMapInfo = () => {
   useEffect(() => {
     const map = new OlMap({
       target: "map",
       layers: [
-        new TileLayer({
-          source: new OSMSource(),
+        new OlTileLayer({
+          source: new OlOSMSource(),
         }),
       ],
-      view: new View({
+      view: new OlView({
         center: [0, 0],
         zoom: 2,
       }),
@@ -35,7 +35,7 @@ export const ShowMapInfo = () => {
       console.log("## 현재 영역 좌표: ", [minX, minY, maxX, maxY]);
     });
 
-    map.on("pointermove", (e: MapBrowserEvent<UIEvent>) => {
+    map.on("pointermove", (e: OlMapBrowserEvent<UIEvent>) => {
       // 마우스 위치 좌표 추출하기
       const [x, y]: number[] = e.coordinate;
       console.log("## 마우스 위치 좌표: ", [x, y]);

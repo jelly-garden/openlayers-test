@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 
-import { Map as OlMap, View } from "ol";
+import { Map as OlMap, View as OlView } from "ol";
 
 import { osmLayer } from "../components/layers";
 
 export const Osm = () => {
   useEffect(() => {
-    const view = new View({
+    const view = new OlView({
       projection: "EPSG:3857",
       center: [14135490.777017945, 4518386.883679577],
       zoom: 17,

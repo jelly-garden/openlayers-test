@@ -1,11 +1,11 @@
-import { ViewOptions } from "ol/View";
+import { ViewOptions as OlViewOptions } from "ol/View";
 
-import Map from "../components/map";
-import MapBoard, { BoundaryBoard, LayerBoard, MetaBoard, PositionBoard } from "../components/mapBoard";
-import MapInteraction, { Location } from "../components/mapInteraction";
+import { Map } from "../components/map";
+import { MapBoard, BoundaryBoard, LayerBoard, MetaBoard, PositionBoard } from "../components/mapBoard";
+import { MapInteraction, Location } from "../components/mapInteraction";
 
 export const AdvancedMap = () => {
-  const initialViewOptions: ViewOptions = {
+  const initialViewOptions: OlViewOptions = {
     projection: "EPSG:3857",
     center: [14135490.777017945, 4518386.883679577],
     zoom: 17,
