@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 
-import { Map as OlMap, View as OlView } from "ol";
+import OlMap from "ol/Map";
+import OlView from "ol/View";
 
 import {
   vworldBaseLayer,
@@ -18,7 +19,7 @@ export const VWorld = () => {
       zoom: 17,
     });
 
-    const map = new OlMap({
+    new OlMap({
       layers: [vworldBaseLayer, vworldGrayLayer, vworldMidnightLayer, vworldHybridLayer, vworldSatelliteLayer],
       target: "map",
       view: view,

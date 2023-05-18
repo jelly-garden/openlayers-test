@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
-import { Map as OlMap } from "ol";
+import OlMap from "ol/Map";
 
 interface MapContextProps {
   map?: OlMap;

@@ -1,7 +1,8 @@
 import { useEffect, useState, useRef, ReactNode } from "react";
 
-import { Map as OlMap, View as OlView } from "ol";
-import { Layer } from "ol/layer";
+import { Layer as OlLayer } from "ol/layer";
+import OlMap from "ol/Map";
+import OlView from "ol/View";
 
 import { osmLayer } from "../layers";
 
@@ -11,7 +12,7 @@ import "./Map.css";
 
 interface MapProps {
   children?: ReactNode;
-  initialLayers?: Layer[];
+  initialLayers?: OlLayer[];
   initialView?: OlView;
 }
 

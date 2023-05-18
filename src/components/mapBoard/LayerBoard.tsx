@@ -1,8 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 
+import { BaseMap } from "../layers";
 import {
-  BaseMap,
-  BaseMapValueType,
   osmLayer,
   vworldBaseLayer,
   vworldGrayLayer,
@@ -15,7 +14,7 @@ import { MapContext } from "../map";
 const LayerBoard = () => {
   const { map } = useContext(MapContext);
 
-  const [layerState, setLayerState] = useState<BaseMapValueType>(BaseMap.BASE_OSM);
+  const [layerState, setLayerState] = useState<BaseMap>(BaseMap.BASE_OSM);
   const [extState, setExtState] = useState<boolean>(false);
 
   /**
@@ -93,7 +92,7 @@ const LayerBoard = () => {
       <div className="map-board-title">Layer</div>
       <div className="map-board-item">
         <small>layer</small>
-        <select value={layerState} onChange={(e) => setLayerState(e.target.value as BaseMapValueType)}>
+        <select value={layerState} onChange={(e) => setLayerState(e.target.value as BaseMap)}>
           <option value={BaseMap.BASE_OSM}>OSM</option>
           <option value={BaseMap.BASE_VWORLD_BASE}>VWorld 기본</option>
           <option value={BaseMap.BASE_VWORLD_GRAY}>VWorld 흑백</option>

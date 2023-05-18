@@ -1,14 +1,17 @@
 import { useContext, useEffect } from "react";
 
+import OlFeature from "ol/Feature";
 import { GeoJSON as OlGeoJSON } from "ol/format";
+import Geometry from "ol/geom/Geometry";
 import { Vector as OlVectorLayer } from "ol/layer";
 import { bbox as olBbox } from "ol/loadingstrategy";
+import RenderFeature from "ol/render/Feature";
 import { Vector as OlVectorSource } from "ol/source";
 import { Style as OlStyle, Stroke as OlStroke, Fill as OlFill, Text as OlText } from "ol/style";
 import { default as OlView } from "ol/View";
 
 import { Map, MapContext } from "../components/map";
-import { Util } from "../util";
+import { urlBuilder } from "../utils/url";
 
 const WfsFeature = () => {
   const { map } = useContext(MapContext);
@@ -20,7 +23,7 @@ const WfsFeature = () => {
     const wfsSource = new OlVectorSource({
       format: new OlGeoJSON(),
       url: (extent) =>
-        Util.urlBuilder("/geoserver/wfs", {
+        urlBuilder("/geoserver/wfs", {
           service: "WFS",
           version: "2.0.0",
           request: "GetFeature",
@@ -33,31 +36,34 @@ const WfsFeature = () => {
       strategy: olBbox,
     });
 
+    const getPolygonStyle = (feature: RenderFeature | OlFeature<Geometry>): OlStyle => {
+      return new OlStyle({
+        stroke: new OlStroke({
+          color: "rgba(100, 149, 237, 1)",
+          width: 2,
+        }),
+        fill: new OlFill({
+          color: "rgba(100, 149, 237, 0.6)",
+        }),
+        text: new OlText({
+          font: "0.8rem sans-serif",
+          fill: new OlFill({ color: "white" }),
+          stroke: new OlStroke({
+            color: "rgba(0, 0, 0, 1)",
+            width: 4,
+          }),
+          text: feature.get("address"),
+        }),
+      });
+    };
+
     // WFS 벡터 레이어 객체
     const wfsLayer = new OlVectorLayer({
       source: wfsSource,
-      style: (feature) =>
-        new OlStyle({
-          stroke: new OlStroke({
-            color: "rgba(100, 149, 237, 1)",
-            width: 2,
-          }),
-          fill: new OlFill({
-            color: "rgba(100, 149, 237, 0.6)",
-          }),
-          text: new OlText({
-            font: "0.8rem sans-serif",
-            fill: new OlFill({ color: "white" }),
-            stroke: new OlStroke({
-              color: "rgba(0, 0, 0, 1)",
-              width: 4,
-            }),
-            text: feature.get("address"),
-          }),
-        }),
+      properties: { name: "wfs" },
+      style: getPolygonStyle,
       minZoom: 15,
       zIndex: 5,
-      properties: { name: "wfs" },
     });
 
     map.addLayer(wfsLayer);

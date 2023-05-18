@@ -1,10 +1,10 @@
 import { useEffect, useState, useRef } from "react";
 
-import { Map as OlMap, View as OlView } from "ol";
+import OlMap from "ol/Map";
+import OlView from "ol/View";
 
 import {
   BaseMap,
-  BaseMapValueType,
   osmLayer,
   vworldBaseLayer,
   vworldGrayLayer,
@@ -16,7 +16,7 @@ export const ChangeMapObject = () => {
   const mapRef = useRef<HTMLDivElement>(null);
 
   const [map, setMap] = useState<OlMap>();
-  const [layerState, setLayerState] = useState<BaseMapValueType>(BaseMap.BASE_OSM);
+  const [layerState, setLayerState] = useState<BaseMap>(BaseMap.BASE_OSM);
 
   useEffect(() => {
     if (!mapRef.current) return;
@@ -70,7 +70,7 @@ export const ChangeMapObject = () => {
     <div className="map-wrapper">
       <select
         value={layerState}
-        onChange={(e) => setLayerState(e.target.value as BaseMapValueType)}
+        onChange={(e) => setLayerState(e.target.value as BaseMap)}
         style={{ position: "absolute", right: "10px", top: "10px", zIndex: 1 }}
       >
         <option value={BaseMap.BASE_OSM}>OSM</option>

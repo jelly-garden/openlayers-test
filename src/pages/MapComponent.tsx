@@ -1,4 +1,4 @@
-import { View as OlView } from "ol";
+import OlView from "ol/View";
 
 import { Map } from "../components/map";
 import { MapBoard, BoundaryBoard, LayerBoard, MetaBoard, PositionBoard } from "../components/mapBoard";

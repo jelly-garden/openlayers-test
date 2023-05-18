@@ -1,12 +1,18 @@
 import { Tile as OlTileLayer } from "ol/layer";
 import { OSM as OlOSMSource, XYZ as OlXYZSource } from "ol/source";
 
-import { BaseMap, ExtMap } from "./types";
-
 const API_KEY = import.meta.env.VITE_VWORLD_API_KEY;
 
+export enum BaseMap {
+  BASE_OSM = "base-osm", // OSM
+  BASE_VWORLD_BASE = "base-vworld-base", // VWorld 기본
+  BASE_VWORLD_GRAY = "base-vworld-gray", // VWorld 흑백
+  BASE_VWORLD_MIDNIGHT = "base-vworld-midnight", // VWorld 야간
+  BASE_VWORLD_SATELLITE = "base-vworld-satellite", // VWorld 위성
+}
+
 // OSM 지도
-const osmLayer = new OlTileLayer({
+export const osmLayer = new OlTileLayer({
   source: new OlOSMSource({
     cacheSize: 0,
   }),
@@ -16,7 +22,7 @@ const osmLayer = new OlTileLayer({
 });
 
 // VWorld 기본지도
-const vworldBaseLayer = new OlTileLayer({
+export const vworldBaseLayer = new OlTileLayer({
   source: new OlXYZSource({
     url: `https://api.vworld.kr/req/wmts/1.0.0/${API_KEY}/Base/{z}/{y}/{x}.png`,
   }),
@@ -28,7 +34,7 @@ const vworldBaseLayer = new OlTileLayer({
 });
 
 // VWorld 백지도
-const vworldGrayLayer = new OlTileLayer({
+export const vworldGrayLayer = new OlTileLayer({
   source: new OlXYZSource({
     url: `https://api.vworld.kr/req/wmts/1.0.0/${API_KEY}/gray/{z}/{y}/{x}.png`,
   }),
@@ -40,7 +46,7 @@ const vworldGrayLayer = new OlTileLayer({
 });
 
 // VWorld 야간지도
-const vworldMidnightLayer = new OlTileLayer({
+export const vworldMidnightLayer = new OlTileLayer({
   source: new OlXYZSource({
     url: `https://api.vworld.kr/req/wmts/1.0.0/${API_KEY}/midnight/{z}/{y}/{x}.png`,
   }),
@@ -51,20 +57,8 @@ const vworldMidnightLayer = new OlTileLayer({
   preload: Infinity,
 });
 
-// VWorld 하이브리드 지도
-const vworldHybridLayer = new OlTileLayer({
-  source: new OlXYZSource({
-    url: `https://api.vworld.kr/req/wmts/1.0.0/${API_KEY}/Hybrid/{z}/{y}/{x}.png`,
-  }),
-  properties: { name: ExtMap.EXT_VWORLD_HYBRID },
-  minZoom: 5,
-  maxZoom: 19,
-  zIndex: 3,
-  preload: Infinity,
-});
-
 // VWorld 위성지도
-const vworldSatelliteLayer = new OlTileLayer({
+export const vworldSatelliteLayer = new OlTileLayer({
   source: new OlXYZSource({
     url: `https://api.vworld.kr/req/wmts/1.0.0/${API_KEY}/Satellite/{z}/{y}/{x}.jpeg`,
   }),
@@ -74,5 +68,3 @@ const vworldSatelliteLayer = new OlTileLayer({
   zIndex: 2,
   preload: Infinity,
 });
-
-export { osmLayer, vworldBaseLayer, vworldGrayLayer, vworldMidnightLayer, vworldHybridLayer, vworldSatelliteLayer };

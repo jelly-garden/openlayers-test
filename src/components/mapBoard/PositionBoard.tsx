@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 
-import { MapBrowserEvent as OlMapBrowserEvent } from "ol";
+import OlMapBrowserEvent from "ol/MapBrowserEvent";
 
 import { MapContext } from "../map";
 

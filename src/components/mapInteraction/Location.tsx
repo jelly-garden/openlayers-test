@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 
-import { Feature as OlFeature } from "ol";
+import OlFeature from "ol/Feature";
 import { Point as OlPoint } from "ol/geom";
 import { Vector as OlVectorLayer } from "ol/layer";
 import * as OlProj from "ol/proj";

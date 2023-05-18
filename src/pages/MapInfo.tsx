@@ -1,8 +1,10 @@
 import { useEffect } from "react";
 
-import { Map as OlMap, View as OlView, MapBrowserEvent as OlMapBrowserEvent } from "ol";
 import { Tile as OlTileLayer } from "ol/layer";
+import OlMap from "ol/Map";
+import OlMapBrowserEvent from "ol/MapBrowserEvent";
 import { OSM as OlOSMSource } from "ol/source";
+import OlView from "ol/View";
 
 export const MapInfo = () => {
   useEffect(() => {

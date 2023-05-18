@@ -1,16 +1,26 @@
-export {
+import {
+  BaseMap,
   osmLayer,
   vworldBaseLayer,
   vworldGrayLayer,
-  vworldHybridLayer,
   vworldMidnightLayer,
   vworldSatelliteLayer,
-} from "./MapLayers";
+} from "./BaseMapLayers";
+import { ExtMap, vworldHybridLayer } from "./ExtMapLayers";
+
 export {
+  /**
+   * 배경지도
+   */
   BaseMap,
+  osmLayer,
+  vworldBaseLayer,
+  vworldGrayLayer,
+  vworldMidnightLayer,
+  vworldSatelliteLayer,
+  /**
+   * 확장지도
+   */
   ExtMap,
-  type BaseMapType,
-  type BaseMapValueType,
-  type ExtMapType,
-  type ExtMapValueType,
-} from "./types";
+  vworldHybridLayer,
+};
