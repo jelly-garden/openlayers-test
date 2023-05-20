@@ -3,10 +3,10 @@ import { useContext, useEffect } from "react";
 import OlFeature from "ol/Feature";
 import { GeoJSON as OlGeoJSON } from "ol/format";
 import Geometry from "ol/geom/Geometry";
-import { Vector as OlVectorLayer } from "ol/layer";
+import { Vector as OlVectorLayer, Image as OlImageLayer } from "ol/layer";
 import { bbox as olBbox } from "ol/loadingstrategy";
 import RenderFeature from "ol/render/Feature";
-import { Vector as OlVectorSource } from "ol/source";
+import { Vector as OlVectorSource, ImageWMS as OlImageWMSource } from "ol/source";
 import { Style as OlStyle, Stroke as OlStroke, Fill as OlFill, Text as OlText } from "ol/style";
 import { default as OlView } from "ol/View";
 
@@ -19,7 +19,7 @@ const WfsFeature = () => {
   useEffect(() => {
     if (!map) return;
 
-    // WFS 벡터 소스
+    // WFS 벡터 소스 객체
     const wfsSource = new OlVectorSource({
       format: new OlGeoJSON(),
       url: (extent) =>
@@ -36,6 +36,7 @@ const WfsFeature = () => {
       strategy: olBbox,
     });
 
+    // WFS 벡터 스타일
     const getPolygonStyle = (feature: RenderFeature | OlFeature<Geometry>): OlStyle => {
       return new OlStyle({
         stroke: new OlStroke({
@@ -78,6 +79,42 @@ const WfsFeature = () => {
   return null;
 };
 
+const WmsFeature = () => {
+  const { map } = useContext(MapContext);
+
+  useEffect(() => {
+    if (!map) return;
+
+    // WMS 소스 객체
+    const wmsSource = new OlImageWMSource({
+      url: "/geoserver/wms",
+      params: {
+        layers: "test:build_sejong",
+        exceptions: "application/json",
+      },
+      serverType: "geoserver",
+    });
+
+    // WMS 레이어 객체
+    const wmsLayer = new OlImageLayer({
+      source: wmsSource,
+      properties: { name: "wms" },
+      minZoom: 15,
+      zIndex: 5,
+    });
+
+    map.addLayer(wmsLayer);
+
+    return () => {
+      if (map) {
+        map.removeLayer(wmsLayer);
+      }
+    };
+  }, [map]);
+
+  return null;
+};
+
 export const Feature = () => {
   const initialView = new OlView({
     projection: "EPSG:3857",
@@ -88,7 +125,7 @@ export const Feature = () => {
   return (
     <div className="map-wrapper">
       <Map initialView={initialView}>
-        <WfsFeature />
+        <WmsFeature />
       </Map>
     </div>
   );
