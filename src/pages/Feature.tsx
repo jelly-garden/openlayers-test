@@ -1,8 +1,10 @@
 import { useContext, useEffect } from "react";
 
+import { click, pointerMove } from "ol/events/condition";
 import OlFeature from "ol/Feature";
 import { GeoJSON as OlGeoJSON } from "ol/format";
 import Geometry from "ol/geom/Geometry";
+import { Select } from "ol/interaction";
 import { Vector as OlVectorLayer, Image as OlImageLayer } from "ol/layer";
 import { bbox as olBbox } from "ol/loadingstrategy";
 import RenderFeature from "ol/render/Feature";
@@ -37,7 +39,7 @@ const WfsFeature = () => {
     });
 
     // WFS 벡터 스타일
-    const getPolygonStyle = (feature: RenderFeature | OlFeature<Geometry>): OlStyle => {
+    const getPolygonStyle = (): OlStyle => {
       return new OlStyle({
         stroke: new OlStroke({
           color: "rgba(100, 149, 237, 1)",
@@ -45,15 +47,6 @@ const WfsFeature = () => {
         }),
         fill: new OlFill({
           color: "rgba(100, 149, 237, 0.6)",
-        }),
-        text: new OlText({
-          font: "0.8rem sans-serif",
-          fill: new OlFill({ color: "white" }),
-          stroke: new OlStroke({
-            color: "rgba(0, 0, 0, 1)",
-            width: 4,
-          }),
-          text: feature.get("address"),
         }),
       });
     };
@@ -68,6 +61,51 @@ const WfsFeature = () => {
     });
 
     map.addLayer(wfsLayer);
+
+    // hover 상호작용 추가
+    const getHoverStyle = (): OlStyle => {
+      return new OlStyle({
+        stroke: new OlStroke({
+          color: "rgba(40, 108, 232, 1)",
+          width: 2,
+        }),
+        fill: new OlFill({
+          color: "rgba(40, 108, 232, 0.6)",
+        }),
+      });
+    };
+    const hoverSelect = new Select({
+      condition: pointerMove,
+      style: getHoverStyle,
+    });
+    map.addInteraction(hoverSelect);
+
+    // click 상호작용 추가
+    const getClickStyle = (feature: RenderFeature | OlFeature<Geometry>): OlStyle => {
+      return new OlStyle({
+        stroke: new OlStroke({
+          color: "rgba(210,19,82, 1)",
+          width: 2,
+        }),
+        fill: new OlFill({
+          color: "rgba(210,19,82, 0.6)",
+        }),
+        text: new OlText({
+          font: "0.8rem sans-serif",
+          fill: new OlFill({ color: "white" }),
+          stroke: new OlStroke({
+            color: "rgba(0, 0, 0, 1)",
+            width: 4,
+          }),
+          text: feature.get("BULD_MNNM").toString(),
+        }),
+      });
+    };
+    const clickSelect = new Select({
+      condition: click,
+      style: getClickStyle,
+    });
+    map.addInteraction(clickSelect);
 
     return () => {
       if (map) {
@@ -125,7 +163,7 @@ export const Feature = () => {
   return (
     <div className="map-wrapper">
       <Map initialView={initialView}>
-        <WmsFeature />
+        <WfsFeature />
       </Map>
     </div>
   );
