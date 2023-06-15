@@ -29,12 +29,10 @@ const PositionBoard = ({ map }: PositionBoardProps) => {
   useEffect(() => {
     if (!map) return;
 
-    map.once("postrender", () => {
-      const center = map.getView().getCenter();
-      if (center) {
-        setPosition(center);
-      }
-    });
+    const center = map.getView().getCenter();
+    if (center) {
+      setPosition(center);
+    }
 
     map.on("pointermove", (e: MapBrowserEvent<UIEvent>) => {
       const [x, y]: number[] = e.coordinate;

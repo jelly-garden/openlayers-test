@@ -17,7 +17,7 @@ export const WMS = () => {
   const mapRef = useRef<HTMLDivElement>(null);
 
   const [mapState, setMapState] = useState<Map>();
-  const [sourceType, setSourceType] = useState<SourceType>("tile");
+  const [sourceType, setSourceType] = useState<SourceType>();
 
   useEffect(() => {
     if (!mapRef.current) return;
@@ -32,6 +32,7 @@ export const WMS = () => {
     });
     map.setTarget(mapRef.current);
     setMapState(map);
+    setSourceType("tile");
 
     return () => {
       map.setTarget(undefined);
@@ -48,7 +49,9 @@ export const WMS = () => {
       .forEach((layer) => mapState.removeLayer(layer));
 
     // 선택한 타입의 WMS 레이어 추가
-    mapState.addLayer(getLayer(sourceType));
+    if (sourceType) {
+      mapState.addLayer(getLayer(sourceType));
+    }
 
     return () => {
       mapState

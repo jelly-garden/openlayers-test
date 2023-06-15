@@ -34,10 +34,8 @@ const BoundaryBoard = ({ map }: BoundaryBoardProps) => {
   useEffect(() => {
     if (!map) return;
 
-    map.once("postrender", () => {
-      const [minX, minY, maxX, maxY]: number[] = map.getView().calculateExtent();
-      setBoundary([minX, minY, maxX, maxY]);
-    });
+    const [minX, minY, maxX, maxY]: number[] = map.getView().calculateExtent();
+    setBoundary([minX, minY, maxX, maxY]);
 
     map.on("moveend", () => {
       const [minX, minY, maxX, maxY]: number[] = map.getView().calculateExtent();

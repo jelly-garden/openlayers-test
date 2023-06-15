@@ -15,10 +15,8 @@ const MetaBoard = ({ map }: MetaBoardProps) => {
   useEffect(() => {
     if (!map) return;
 
-    map.once("postrender", () => {
-      const epsg: string = map.getView().getProjection().getCode();
-      setProjState(epsg);
-    });
+    const epsg: string = map.getView().getProjection().getCode();
+    setProjState(epsg);
   }, [map]);
 
   /**
@@ -38,10 +36,8 @@ const MetaBoard = ({ map }: MetaBoardProps) => {
   useEffect(() => {
     if (!map) return;
 
-    map.once("postrender", () => {
-      const zoom = map.getView().getZoom() || 0;
-      setZoom(zoom);
-    });
+    const zoom = map.getView().getZoom() || 0;
+    setZoom(zoom);
 
     map.on("moveend", () => {
       const zoom = map.getView().getZoom() || 0;
