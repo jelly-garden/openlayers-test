@@ -1,10 +1,12 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-import { MapContext } from "../map";
+import Map from "ol/Map";
 
-const MetaBoard = () => {
-  const { map } = useContext(MapContext);
+interface MetaBoardProps {
+  map?: Map;
+}
 
+const MetaBoard = ({ map }: MetaBoardProps) => {
   const [projState, setProjState] = useState<string>("");
 
   /**

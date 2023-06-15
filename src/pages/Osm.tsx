@@ -1,28 +1,36 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
-import OlMap from "ol/Map";
-import OlView from "ol/View";
+import Map from "ol/Map";
+import View from "ol/View";
+import proj4 from "proj4";
 
-import { osmLayer } from "../components/layers";
+import { osmLayer } from "../common/layers";
+import { seoulPosition } from "../contants/position";
 
 export const Osm = () => {
-  useEffect(() => {
-    const view = new OlView({
-      projection: "EPSG:3857",
-      center: [14135490.777017945, 4518386.883679577],
-      zoom: 17,
-    });
+  const mapRef = useRef<HTMLDivElement>(null);
 
-    new OlMap({
+  useEffect(() => {
+    if (!mapRef.current) return;
+
+    const map = new Map({
       layers: [osmLayer],
-      target: "map",
-      view: view,
+      view: new View({
+        projection: "EPSG:3857",
+        center: proj4("EPSG:4326", "EPSG:3857", seoulPosition),
+        zoom: 17,
+      }),
     });
+    map.setTarget(mapRef.current);
+
+    return () => {
+      map.setTarget(undefined);
+    };
   }, []);
 
   return (
     <div className="map-wrapper">
-      <div id="map"></div>
+      <div id="map" ref={mapRef}></div>
     </div>
   );
 };

@@ -1,20 +1,29 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-import { BaseMap } from "../layers";
+import Map from "ol/Map";
+
 import {
+  BaseMap,
   osmLayer,
   vworldBaseLayer,
   vworldGrayLayer,
   vworldHybridLayer,
   vworldMidnightLayer,
   vworldSatelliteLayer,
-} from "../layers";
-import { MapContext } from "../map";
+  googleRoadLayer,
+  googleTerrainLayer,
+  googleAlterLayer,
+  googleSatelliteLayer,
+  googleOnlyTerrainLayer,
+  googleHybridLayer,
+} from "../../common/layers";
 
-const LayerBoard = () => {
-  const { map } = useContext(MapContext);
+interface LayerBoardProps {
+  map?: Map;
+}
 
-  const [layerState, setLayerState] = useState<BaseMap>(BaseMap.BASE_OSM);
+const LayerBoard = ({ map }: LayerBoardProps) => {
+  const [layerState, setLayerState] = useState<BaseMap>(BaseMap.BASE_VWORLD_BASE);
   const [extState, setExtState] = useState<boolean>(false);
 
   /**
@@ -31,6 +40,9 @@ const LayerBoard = () => {
 
     // 선택한 값에 따라 레이어 추가
     switch (layerState) {
+      case BaseMap.BASE_OSM:
+        map.addLayer(osmLayer);
+        break;
       case BaseMap.BASE_VWORLD_BASE:
         map.addLayer(vworldBaseLayer);
         break;
@@ -43,21 +55,38 @@ const LayerBoard = () => {
       case BaseMap.BASE_VWORLD_SATELLITE:
         map.addLayer(vworldSatelliteLayer);
         break;
-      default:
-        map.addLayer(osmLayer);
-        setExtState(false);
+      case BaseMap.BASE_GOOGLE_ROAD:
+        map.addLayer(googleRoadLayer);
+        break;
+      case BaseMap.BASE_GOOGLE_TERRAIN:
+        map.addLayer(googleTerrainLayer);
+        break;
+      case BaseMap.BASE_GOOGLE_ALTER:
+        map.addLayer(googleAlterLayer);
+        break;
+      case BaseMap.BASE_GOOGLE_SATELLITE:
+        map.addLayer(googleSatelliteLayer);
+        break;
+      case BaseMap.BASE_GOOGLE_ONLY_TERRAIN:
+        map.addLayer(googleOnlyTerrainLayer);
+        break;
+      case BaseMap.BASE_GOOGLE_HYBRID:
+        map.addLayer(googleHybridLayer);
         break;
     }
 
+    // vworld로 시작하지 않을 경우
+    if (!layerState.startsWith("base-vworld")) {
+      setExtState(false);
+    }
+
     return () => {
-      if (map) {
-        map
-          .getAllLayers()
-          .filter((layer) => (layer.get("name") as string).startsWith("base"))
-          .forEach((layer) => map.removeLayer(layer));
-      }
+      map
+        .getAllLayers()
+        .filter((layer) => (layer.get("name") as string).startsWith("base"))
+        .forEach((layer) => map.removeLayer(layer));
     };
-  }, [layerState, map]);
+  }, [layerState]);
 
   /**
    * 확장지도 변경 핸들러
@@ -78,14 +107,12 @@ const LayerBoard = () => {
     }
 
     return () => {
-      if (map) {
-        map
-          .getAllLayers()
-          .filter((layer) => (layer.get("name") as string).startsWith("ext"))
-          .forEach((layer) => map.removeLayer(layer));
-      }
+      map
+        .getAllLayers()
+        .filter((layer) => (layer.get("name") as string).startsWith("ext"))
+        .forEach((layer) => map.removeLayer(layer));
     };
-  }, [extState, map]);
+  }, [extState]);
 
   return (
     <div className="map-board-item-group" data-name="layer">
@@ -98,6 +125,12 @@ const LayerBoard = () => {
           <option value={BaseMap.BASE_VWORLD_GRAY}>VWorld 흑백</option>
           <option value={BaseMap.BASE_VWORLD_MIDNIGHT}>VWorld 야간</option>
           <option value={BaseMap.BASE_VWORLD_SATELLITE}>VWorld 위성</option>
+          <option value={BaseMap.BASE_GOOGLE_ROAD}>Google 로드맵</option>
+          <option value={BaseMap.BASE_GOOGLE_TERRAIN}>Google 지형도</option>
+          <option value={BaseMap.BASE_GOOGLE_ALTER}>Google 변경된 로드맵</option>
+          <option value={BaseMap.BASE_GOOGLE_SATELLITE}>Google 위성</option>
+          <option value={BaseMap.BASE_GOOGLE_ONLY_TERRAIN}>Google 지형 전용도</option>
+          <option value={BaseMap.BASE_GOOGLE_HYBRID}>Google 하이브리드</option>
         </select>
       </div>
       <div className="map-board-item">
@@ -106,7 +139,7 @@ const LayerBoard = () => {
           type="checkbox"
           name="ext"
           checked={extState}
-          disabled={layerState === BaseMap.BASE_OSM}
+          disabled={!layerState.startsWith("base-vworld")}
           onChange={(e) => setExtState(e.target.checked)}
         />
       </div>

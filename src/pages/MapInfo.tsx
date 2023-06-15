@@ -1,52 +1,46 @@
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
-import { Tile as OlTileLayer } from "ol/layer";
-import OlMap from "ol/Map";
-import OlMapBrowserEvent from "ol/MapBrowserEvent";
-import { OSM as OlOSMSource } from "ol/source";
-import OlView from "ol/View";
+import Map from "ol/Map";
+import View from "ol/View";
+import proj4 from "proj4";
+
+import { vworldBaseLayer } from "../common/layers";
+import { BoundaryBoard, LayerBoard, MapBoard, MetaBoard, PositionBoard } from "../components/mapBoard";
+import { seoulPosition } from "../contants/position";
 
 export const MapInfo = () => {
+  const mapRef = useRef<HTMLDivElement>(null);
+
+  const [mapState, setMapState] = useState<Map>();
+
   useEffect(() => {
-    const map = new OlMap({
-      target: "map",
-      layers: [
-        new OlTileLayer({
-          source: new OlOSMSource(),
-        }),
-      ],
-      view: new OlView({
-        center: [0, 0],
-        zoom: 2,
+    if (!mapRef.current) return;
+
+    const map = new Map({
+      layers: [vworldBaseLayer],
+      view: new View({
+        projection: "EPSG:3857",
+        center: proj4("EPSG:4326", "EPSG:3857", seoulPosition),
+        zoom: 17,
       }),
     });
+    map.setTarget(mapRef.current);
+    setMapState(map);
 
-    map.once("postrender", () => {
-      // EPSG 코드
-      const epsg: string = map.getView().getProjection().getCode();
-      console.log("## EPSG 코드 : ", epsg);
-    });
-
-    map.on("moveend", () => {
-      // 줌 레벨
-      const zoom = map.getView().getZoom();
-      console.log("## 줌 레벨 : ", zoom);
-
-      // 현재 영역 좌표 추출하기
-      const [minX, minY, maxX, maxY]: number[] = map.getView().calculateExtent();
-      console.log("## 현재 영역 좌표: ", [minX, minY, maxX, maxY]);
-    });
-
-    map.on("pointermove", (e: OlMapBrowserEvent<UIEvent>) => {
-      // 마우스 위치 좌표 추출하기
-      const [x, y]: number[] = e.coordinate;
-      console.log("## 마우스 위치 좌표: ", [x, y]);
-    });
+    return () => {
+      map.setTarget(undefined);
+    };
   }, []);
 
   return (
     <div className="map-wrapper">
-      <div id="map"></div>
+      <div id="map" ref={mapRef}></div>
+      <MapBoard>
+        <LayerBoard map={mapState} />
+        <MetaBoard map={mapState} />
+        <BoundaryBoard map={mapState} />
+        <PositionBoard map={mapState} />
+      </MapBoard>
     </div>
   );
 };

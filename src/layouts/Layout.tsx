@@ -3,13 +3,19 @@ import "./Layout.css";
 
 const Layout = () => {
   const menus = [
-    { path: "/", name: "Home" },
     { path: "/osm", name: "OSM 맵" },
     { path: "/vworld", name: "VWorld 맵" },
-    { path: "/map-info", name: "맵 정보 추출" },
-    { path: "/change-map-object", name: "지도 객체 변경" },
-    { path: "/map-component", name: "맵 컴포넌트화" },
-    { path: "/feature", name: "자산" },
+    { path: "/map-info", name: "맵 정보 표시" },
+    { path: "/geo-location", name: "사용지 위치 이동" },
+    { path: "/geo-location-with-marker", name: "사용지 위치 표시" },
+    { path: "/wfs", name: "WFS로 객체 표시" },
+    { path: "/wms", name: "WMS로 객체 표시" },
+    { path: "/feature-click", name: "객체 상호작용 추가" },
+    { path: "/wms-popup", name: "WMS에 팝업 부착" },
+    { path: "/transaction-insert", name: "WFS Transaction으로 데이터 추가" },
+    { path: "/transaction-update", name: "WFS Transaction으로 데이터 수정" },
+    { path: "/transaction-delete", name: "WFS Transaction으로 데이터 삭제" },
+    { path: "/cluster-map", name: "Cluster Map 표현" },
   ];
 
   return (

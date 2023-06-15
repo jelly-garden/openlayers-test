@@ -1,12 +1,13 @@
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 
-import OlMapBrowserEvent from "ol/MapBrowserEvent";
+import Map from "ol/Map";
+import MapBrowserEvent from "ol/MapBrowserEvent";
 
-import { MapContext } from "../map";
+interface PositionBoardProps {
+  map?: Map;
+}
 
-const PositionBoard = () => {
-  const { map } = useContext(MapContext);
-
+const PositionBoard = ({ map }: PositionBoardProps) => {
   /**
    * 마우스 위치 지정 메서드
    * @param coordinate
@@ -35,7 +36,7 @@ const PositionBoard = () => {
       }
     });
 
-    map.on("pointermove", (e: OlMapBrowserEvent<UIEvent>) => {
+    map.on("pointermove", (e: MapBrowserEvent<UIEvent>) => {
       const [x, y]: number[] = e.coordinate;
       setPosition([x, y]);
     });

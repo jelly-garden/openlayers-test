@@ -1,10 +1,12 @@
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 
-import { MapContext } from "../map";
+import Map from "ol/Map";
 
-const BoundaryBoard = () => {
-  const { map } = useContext(MapContext);
+interface BoundaryBoardProps {
+  map?: Map;
+}
 
+const BoundaryBoard = ({ map }: BoundaryBoardProps) => {
   /**
    * 영역 지정 메서드
    * @param extent

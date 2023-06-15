@@ -56,12 +56,8 @@ module.exports = {
         beforeSelfClosing: "always",
       },
     ],
-    "react-hooks/exhaustive-deps": [
-      "warn",
-      {
-        enableDangerousAutofixThisMayCauseInfiniteLoops: true,
-      },
-    ],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
     "prettier/prettier": [
       "error",
       {

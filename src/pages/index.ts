@@ -1,8 +1,9 @@
-export { Home } from "./Home";
 export { NotFound } from "./NotFound";
 export { Osm } from "./Osm";
 export { VWorld } from "./Vworld";
 export { MapInfo } from "./MapInfo";
-export { ChangeMapObject } from "./ChangeMapObject";
-export { MapComponent } from "./MapComponent";
-export { Feature } from "./Feature";
+export { GeoLocation } from "./GeoLocation";
+export { GeoLocationWithMarker } from "./GeoLocationWithMarker";
+export { WFS } from "./WFS";
+export { WMS } from "./WMS";
+export { FeatureClick } from "./FeatureClick";
