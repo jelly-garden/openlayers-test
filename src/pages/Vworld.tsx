@@ -21,6 +21,7 @@ export const VWorld = () => {
         zoom: 17,
       }),
     });
+
     map.setTarget(mapRef.current);
 
     return () => {

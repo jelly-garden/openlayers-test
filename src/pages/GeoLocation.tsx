@@ -24,6 +24,7 @@ export const GeoLocation = () => {
         zoom: 17,
       }),
     });
+
     map.setTarget(mapRef.current);
     setMapState(map);
 

@@ -55,6 +55,7 @@ export const WFS = () => {
         zoom: 17,
       }),
     });
+
     map.setTarget(mapRef.current);
 
     return () => {

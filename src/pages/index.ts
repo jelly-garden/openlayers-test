@@ -7,3 +7,4 @@ export { GeoLocationWithMarker } from "./GeoLocationWithMarker";
 export { WFS } from "./WFS";
 export { WMS } from "./WMS";
 export { FeatureClick } from "./FeatureClick";
+export { WFSPopup } from "./WFSPopup";

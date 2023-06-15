@@ -1,7 +1,18 @@
 import { Routes, Route } from "react-router-dom";
 
 import { Layout } from "./layouts";
-import { NotFound, Osm, VWorld, MapInfo, GeoLocation, GeoLocationWithMarker, WFS, WMS, FeatureClick } from "./pages";
+import {
+  NotFound,
+  Osm,
+  VWorld,
+  MapInfo,
+  GeoLocation,
+  GeoLocationWithMarker,
+  WFS,
+  WMS,
+  FeatureClick,
+  WFSPopup,
+} from "./pages";
 
 import "./App.css";
 
@@ -17,7 +28,7 @@ function App() {
         <Route path="wfs" element={<WFS />} />
         <Route path="wms" element={<WMS />} />
         <Route path="feature-click" element={<FeatureClick />} />
-        <Route path="wfs-popup" element={<></>} />
+        <Route path="wfs-popup" element={<WFSPopup />} />
         <Route path="wms-popup" element={<></>} />
         <Route path="transaction-insert" element={<></>} />
         <Route path="transaction-update" element={<></>} />

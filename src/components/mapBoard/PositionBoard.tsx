@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 
 import Map from "ol/Map";
-import MapBrowserEvent from "ol/MapBrowserEvent";
 
 interface PositionBoardProps {
   map?: Map;
@@ -34,7 +33,7 @@ const PositionBoard = ({ map }: PositionBoardProps) => {
       setPosition(center);
     }
 
-    map.on("pointermove", (e: MapBrowserEvent<UIEvent>) => {
+    map.on("pointermove", (e) => {
       const [x, y]: number[] = e.coordinate;
       setPosition([x, y]);
     });

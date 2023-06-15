@@ -11,6 +11,7 @@ const Layout = () => {
     { path: "/wfs", name: "WFS로 객체 표시" },
     { path: "/wms", name: "WMS로 객체 표시" },
     { path: "/feature-click", name: "객체 상호작용 추가" },
+    { path: "/wfs-popup", name: "WFS에 팝업 부착" },
     { path: "/wms-popup", name: "WMS에 팝업 부착" },
     { path: "/transaction-insert", name: "WFS Transaction으로 데이터 추가" },
     { path: "/transaction-update", name: "WFS Transaction으로 데이터 수정" },

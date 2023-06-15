@@ -21,6 +21,7 @@ export const Osm = () => {
         zoom: 17,
       }),
     });
+
     map.setTarget(mapRef.current);
 
     return () => {

@@ -30,6 +30,7 @@ export const WMS = () => {
         zoom: 17,
       }),
     });
+
     map.setTarget(mapRef.current);
     setMapState(map);
     setSourceType("tile");

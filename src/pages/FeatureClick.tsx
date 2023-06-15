@@ -23,7 +23,6 @@ export const FeatureClick = () => {
   useEffect(() => {
     if (!mapRef.current) return;
 
-    // WFS 벡터 소스 객체
     const wfsSource = new VectorSource({
       format: new GeoJSON(),
       strategy: bbox,
@@ -40,7 +39,6 @@ export const FeatureClick = () => {
         }),
     });
 
-    // WFS 벡터 레이어 객체
     const wfsLayer = new VectorLayer({
       minZoom: 15,
       properties: { name: "wfs" },
@@ -49,25 +47,28 @@ export const FeatureClick = () => {
       zIndex: 5,
     });
 
+    // 객체의 hover 상호작용 추가
     const hoverSelect = new Select({
       condition: pointerMove,
       style: (feature) => hoverStyle(feature, "BULD_NM"),
     });
 
+    // 객체의 click 상호작용 추가
     const clickSelect = new Select({
       condition: click,
       style: (feature) => clickStyle(feature, "BULD_NM"),
     });
 
     const map = new Map({
-      interactions: defaults().extend([clickSelect, hoverSelect]),
       layers: [vworldBaseLayer, wfsLayer],
+      interactions: defaults().extend([hoverSelect, clickSelect]),
       view: new View({
         projection: "EPSG:3857",
         center: proj4("EPSG:4326", "EPSG:3857", sejongPosition),
         zoom: 17,
       }),
     });
+
     map.setTarget(mapRef.current);
 
     return () => {
