@@ -8,3 +8,4 @@ export { WFS } from "./WFS";
 export { WMS } from "./WMS";
 export { FeatureClick } from "./FeatureClick";
 export { WFSPopup } from "./WFSPopup";
+export { WMSPopup } from "./WMSPopup";

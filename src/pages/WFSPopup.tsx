@@ -1,14 +1,8 @@
-/**
- * WFS 팝업 페이지 컴포넌트
- *
- * @author RWB
- * @since 2022.02.19 Sat 10:17:24
- */
-
 import { ReactNode, useEffect, useRef, useState } from "react";
 
 import { Map, Overlay, View } from "ol";
 import { click, pointerMove } from "ol/events/condition";
+import { getCenter } from "ol/extent";
 import { GeoJSON } from "ol/format";
 import { defaults, Select } from "ol/interaction";
 import { Vector as VectorLayer } from "ol/layer";
@@ -97,8 +91,6 @@ export const WFSPopup = () => {
           if (isBuildingFeature) {
             const geom = feature.getGeometry();
             if (geom) {
-              const [minX, minY, maxX, maxY] = geom.getExtent();
-
               setPopupTitle(feature.getId()?.toString() || "");
               setPopupContent(
                 <ul>
@@ -107,7 +99,7 @@ export const WFSPopup = () => {
                 </ul>
               );
 
-              overlay.setPosition([(maxX + minX) / 2, (maxY + minY) / 2]);
+              overlay.setPosition(getCenter(geom.getExtent()));
             }
           }
         });

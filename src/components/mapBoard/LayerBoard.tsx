@@ -35,7 +35,7 @@ const LayerBoard = ({ map }: LayerBoardProps) => {
     // 배경지도 전체 삭제
     map
       .getAllLayers()
-      .filter((layer) => (layer.get("name") as string).startsWith("base"))
+      .filter((layer) => layer.get("name").startsWith("base"))
       .forEach((layer) => map.removeLayer(layer));
 
     // 선택한 값에 따라 레이어 추가
@@ -83,7 +83,7 @@ const LayerBoard = ({ map }: LayerBoardProps) => {
     return () => {
       map
         .getAllLayers()
-        .filter((layer) => (layer.get("name") as string).startsWith("base"))
+        .filter((layer) => layer.get("name").startsWith("base"))
         .forEach((layer) => map.removeLayer(layer));
     };
   }, [layerState]);
@@ -102,14 +102,14 @@ const LayerBoard = ({ map }: LayerBoardProps) => {
     else {
       map
         .getAllLayers()
-        .filter((layer) => (layer.get("name") as string).startsWith("ext"))
+        .filter((layer) => layer.get("name").startsWith("ext"))
         .forEach((layer) => map.removeLayer(layer));
     }
 
     return () => {
       map
         .getAllLayers()
-        .filter((layer) => (layer.get("name") as string).startsWith("ext"))
+        .filter((layer) => layer.get("name").startsWith("ext"))
         .forEach((layer) => map.removeLayer(layer));
     };
   }, [extState]);

@@ -12,6 +12,7 @@ import {
   WMS,
   FeatureClick,
   WFSPopup,
+  WMSPopup,
 } from "./pages";
 
 import "./App.css";
@@ -29,7 +30,7 @@ function App() {
         <Route path="wms" element={<WMS />} />
         <Route path="feature-click" element={<FeatureClick />} />
         <Route path="wfs-popup" element={<WFSPopup />} />
-        <Route path="wms-popup" element={<></>} />
+        <Route path="wms-popup" element={<WMSPopup />} />
         <Route path="transaction-insert" element={<></>} />
         <Route path="transaction-update" element={<></>} />
         <Route path="transaction-delete" element={<></>} />
